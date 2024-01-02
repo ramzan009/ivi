@@ -1,3 +1,4 @@
+<?php require '../config/db.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +18,7 @@
     <div class="menu">
         <div class="inside">
             <div class="logo">
-                <img class="img_log" src="../images/logo.svg">
+               <a href="../index.html"><img class="img_log" src="../images/logo.svg"></a>
             </div>
             <div class="menu_ivi">
                 <ul>
@@ -41,7 +42,7 @@
                             </div>
                             <div class="dropdown-link-shows">
                                 <h1></h1>
-                                <a href="">Медицинские</a>
+                                <a href="">Комедии</a>
                                 <a href="">Мелодрамы</a>
                                 <a href="">Мистические</a>
                                 <a href="">Приключение</a>
@@ -440,7 +441,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://kit.fontawesome.com/a86f8867e8.js" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-        <script src="../js/script.js"></script>
+        <script src="../js/about_me.js"></script>
+        <script src="../js/main.js"></script>
 </body>
 
 </html>
