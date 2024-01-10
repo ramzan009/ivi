@@ -1,11 +1,26 @@
-<?php require '../config/db.php';?>
+<?php 
+
+require '../config/db.php';
+
+$film = mysqli_query($connection, "SELECT * FROM `films` WHERE `id` = " . $_GET['id']); 
+
+$film_item = mysqli_fetch_assoc($film);  
+
+if($film_item == false) {
+    header('Location: /');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>
+        <?php echo $config['title']; ?>
+    </title>
+
     <link href="../css/style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
@@ -15,204 +30,33 @@
 </head>
 
 <body>
-    <div class="menu">
-        <div class="inside">
-            <div class="logo">
-               <a href="../index.html"><img class="img_log" src="../images/logo.svg"></a>
-            </div>
-            <div class="menu_ivi">
-                <ul>
-                    <li><a href="">Мой Иви</a></li>
-                    <li><a href="">Что нового</a></li>
-                    <li class="dropdown">
-                        <a href="" class="dropdown-link">Фильмы</a>
-                        <div class="block_show">
-                            <div class="dropdown-link-shows">
-                                <h1>Жанры</h1>
-                                <a href="">Биография</a>
-                                <a href="">Боевик</a>
-                                <a href="">Военные</a>
-                                <a href="">Детективы</a>
-                                <a href="">Для всей семьи</a>
-                                <a href="">Документальные</a>
-                                <a href="">Дорамы</a>
-                                <a href="">Драма</a>
-                                <a href="">Исторические</a>
-                                <a href="">Катастро</a>
-                            </div>
-                            <div class="dropdown-link-shows">
-                                <h1></h1>
-                                <a href="">Комедии</a>
-                                <a href="">Мелодрамы</a>
-                                <a href="">Мистические</a>
-                                <a href="">Приключение</a>
-                                <a href="">Романтические</a>
-                                <a href="">Телешоу</a>
-                                <a href="">Триллеры</a>
-                                <a href="">Турецкие</a>
-                                <a href="">Ужасы</a>
-                                <a href="">Фантастика</a>
-                                <a href="">Фзнтези</a>
-                            </div>
-                            <div class="dropdown-link-shows">
-                                <h1>Страны</h1>
-                                <a href="">Русские</a>
-                                <a href="">Зарубежные</a>
-                                <a href="">Американские</a>
-                                <a href="">Корейские</a>
-                                <a href="">Турецкие</a>
-                                <h1>Годы</h1>
-                                <a href="">Фильмы 2023 года</a>
-                                <a href="">Фильмы 2022 года</a>
-                                <a href="">Фильмы 2021 года</a>
-                                <a href="">Фильмы 2020 года</a>
-                            </div>
-                            <div class="dropdown-link-shows">
-                                <h1></h1>
-                                <a href="">Новинки</a>
-                                <a href="">Иви.Рейтинг</a>
-                                <a href="">Сериалы в HD</a>
-                                <a href="">Бесплатные сериалы</a>
-                                <a href="">Сериалы Amediateka</a>
-                                <a href="">Сериалы Paramount Play</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="" class="dropdown-link">Сериалы</a>
-                        <div class="block_show">
-                            <div class="dropdown-link-shows">
-                                <h1>Жанры</h1>
-                                <a href="">Биография</a>
-                                <a href="">Боевик</a>
-                                <a href="">Военные</a>
-                                <a href="">Детективы</a>
-                                <a href="">Для всей семьи</a>
-                                <a href="">Документальные</a>
-                                <a href="">Дорамы</a>
-                                <a href="">Драма</a>
-                                <a href="">Исторические</a>
-                                <a href="">Катастро</a>
-                            </div>
-                            <div class="dropdown-link-shows">
-                                <h1></h1>
-                                <a href="">Медицинские</a>
-                                <a href="">Мелодрамы</a>
-                                <a href="">Мистические</a>
-                                <a href="">Приключение</a>
-                                <a href="">Романтические</a>
-                                <a href="">Телешоу</a>
-                                <a href="">Триллеры</a>
-                                <a href="">Турецкие</a>
-                                <a href="">Ужасы</a>
-                                <a href="">Фантастика</a>
-                                <a href="">Фзнтези</a>
-                            </div>
-                            <div class="dropdown-link-shows">
-                                <h1>Страны</h1>
-                                <a href="">Русские</a>
-                                <a href="">Зарубежные</a>
-                                <a href="">Американские</a>
-                                <a href="">Корейские</a>
-                                <a href="">Турецкие</a>
-                                <h1>Годы</h1>
-                                <a href="">Фильмы 2023 года</a>
-                                <a href="">Фильмы 2022 года</a>
-                                <a href="">Фильмы 2021 года</a>
-                                <a href="">Фильмы 2020 года</a>
-                            </div>
-                            <div class="dropdown-link-shows">
-                                <h1></h1>
-                                <a href="">Новинки</a>
-                                <a href="">Иви.Рейтинг</a>
-                                <a href="">Сериалы в HD</a>
-                                <a href="">Бесплатные сериалы</a>
-                                <a href="">Сериалы Amediateka</a>
-                                <a href="">Сериалы Paramount Play</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="" class="dropdown-link">Мультфильмы</a>
-                        <div class="block_show">
-                            <div class="dropdown-link-shows">
-                                <h1>Жанры</h1>
-                                <a href="">Аниме</a>
-                                <a href="">Боевик</a>
-                                <a href="">Детективы</a>
-                                <a href="">Для взрослых</a>
-                                <a href="">Для всей семьи</a>
-                                <a href="">Для детей</a>
-                                <a href="">Драма</a>
-                                <a href="">История</a>
-                                <a href="">Комедия</a>
-                                <a href="">Кримильные</a>
-                                <a href="">Мюзикл</a>
-                            </div>
-                            <div class="dropdown-link-shows">
-                                <h1></h1>
-                                <a href="">Полнометражные</a>
-                                <a href="">Приключение</a>
-                                <a href="">Развивающие</a>
-                                <a href="">Сериалы</a>
-                                <a href="">Спорт</a>
-                                <a href="">Триллер</a>
-                                <a href="">Триллеры</a>
-                                <a href="">Ужасы</a>
-                                <a href="">Фантастика</a>
-                                <a href="">Фзнтези</a>
-                            </div>
-                            <div class="dropdown-link-shows">
-                                <h1>Страны</h1>
-                                <a href="">Советские</a>
-                                <a href="">Русские</a>
-                                <a href="">Американские</a>
-                                <a href="">Зарубежные</a>
-                                <h1>Годы</h1>
-                                <a href="">Фильмы 2023 года</a>
-                                <a href="">Фильмы 2022 года</a>
-                                <a href="">Фильмы 2021 года</a>
-                                <a href="">Фильмы 2020 года</a>
-                            </div>
-                            <div class="dropdown-link-shows">
-                                <h1></h1>
-                                <a href="">Новинки</a>
-                                <a href="">Мультики в HD</a>
-                                <a href="">Мультики Paramount Play</a>
-                                <a href="">Мульфилмы Dreamworks</a>
-                                <a href="">Мультфильмы СТС Kids</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="">TV+</a></li>
-                </ul>
-            </div>
-            <div class="profile">
-                <ul>
-                    <li class="group"><i class="fa-solid fa-magnifying-glass search"><a href=""> Поиск</a></i></li>
-                    <li><a href=""><i class="fa-regular fa-bell bores"></i></a></li>
-                    <li><i class="fa-regular fa-user ofice"><a href=""> Войти</a></i></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
+<?php require '../pages/includes/menu.php';?>
     <div class="orders">
         <h1 class="parentmesh1">Фильмы-Комедии</h1>
         <div class="fotre">
             <div class="parentmes">
-                <img src="../images/grodxa.jpg">
+                <video controls width="715" height="400">
+                  <source src="<?=$film_item['video']?>" type="video/mp4" />
+                </video>
             </div>
             <div class="default">
-                <h1>На Рубле без рубля (Фильм 2023)</h1>
+                <h1><?php echo $film_item['name']; ?></h1>
                 <div class="dicript">
-                    <p class="padal">2023 1ч.46 мин. 18+</p>
-                    <p class="goter">Россия. Комедии. Русские</p>
+                    <p class="padal"><?php echo $film_item['year']; ?>, 1ч.46 мин. <?php echo $film_item['age']; ?></p>
+                    <?php
+                        $category = mysqli_query($connection, "SELECT * FROM `categories` WHERE `id` = " . $film_item['category_id']);
+                     
+                       $cat = mysqli_fetch_assoc($category);
+
+                     ?>
+                    <p class="goter">Россия. <?php echo $cat['name']; ?>. Русские</p>
                     <p class="spiun">FullHD <i class="fa-solid fa-volume-low" style="color: #C4C2C3;"> РУС</i></p>
                 </div>
                 <div class="entries">
                     <a href="">
                         <div class="watch">
-                            <img src="../images/imged.jpg">
+                            <p class="rating__film"><?php echo $film_item['rating']; ?></p>
                             <p>Рейтинг Иви</p>
                         </div>
                     </a>
@@ -255,9 +99,7 @@
                 <div class="clause_text">
                     <div class="topper">
                         <div class="text_detalis">
-                            <p class="report">История жизни и невероятных спортивных достижений великой лыжницы Елены Вяльбе. Ещё в раннем детстве она вступила на тяжёлый путь профессионального спорта и добилась головокружительных высот вопреки непростым испытаниям. Вдохновляющая биографическая драма.</p><br>
-                            <p class="report">Восьмилетняя девочка Лена из Магадана начинает заниматься лыжным спортом. Она сталкивается с трудностями, но не сдаётся и добивается важнейшей победы. В 1997 году Елена устанавливает рекорд на чемпионате мира в Норвегии – она выигрывает золото во всех пяти видах женской лыжной программы. Чтобы узнать, как сложилась жизнь знаменитой чемпионки, смотри онлайн на Иви «Белый снег».</p><br>
-                            <p class="report">Приглашаем посмотреть фильм «Белый снег» в нашем онлайн-кинотеатре совершенно бесплатно в хорошем HD качестве. Приятного просмотра!</p>
+                                <?=$film_item['description']?>
                         </div>
                         <div class="watch_options">
                             <div class="gourd">
@@ -377,46 +219,7 @@
             </a>
         </div>
         <footer>
-            <div class="fopwer">
-                <div class="footer_block">
-                    <h1>О нас</h1>
-                    <ul>
-                        <li><a href="">О компании</a></li>
-                        <li><a href="">Вакансии</a></li>
-                        <li><a href="">Программа бета-тестирования</a></li>
-                        <li><a href="">Информация для партнёров</a></li>
-                        <li><a href="">Размещение рекламы</a></li>
-                        <li><a href="">Пользовательское соглашение</a></li>
-                        <li><a href="">Политика конфиденциальности</a></li>
-                        <li><a href="">Комплаенс</a></li>
-                    </ul>
-                </div>
-                <div class="footer_block">
-                    <h1>Разделы</h1>
-                    <ul>
-                        <li><a href="">Мой Иви</a></li>
-                        <li><a href="">Что нового</a></li>
-                        <li><a href="">Фильмы</a></li>
-                        <li><a href="">Сериалы</a></li>
-                        <li><a href="">Мультфильмы</a></li>
-                        <li><a href="">TV+</a></li>
-                        <li><a href="">Что посмотреть</a></li>
-                        <li><a href="">Активация сертификата</a></li>
-                    </ul>
-                </div>
-                <div class="footer_block">
-                    <h1>Служба поддержки</h1>
-                    <ul>
-                        <li><a href="">Мы всегда готовы вам помочь.24/7</a></li>
-                        <li><button class="bat_block">Написать в чате</button></li>
-                        <li><a href=""><i class="fa-regular fa-envelope gosres" style="color: #ffffff;"></i></a> <a href=""><i class="fa-solid fa-phone gosres" style="color: #ffffff;"></i></a></li>
-                        <li><a href="">ask.ivi.ru</a></li>
-                        <li><a href="">Ответы на вопросы</a></li>
-                    </ul>
-                </div>
-            </div>
-            <p class="store">© 2023 ООО «Иви.ру»</p>
-            <p class="order_work">HBO ® and related service marks are the property of Home Box Office, Inc</p><br>
+           <?php require '../pages/includes/footer.php'; ?>
         </footer>
         <div class="modal">
             <div class="close_block">
@@ -437,12 +240,12 @@
                     <p class="presets_content"><a href="">Высокий рейтинг</a></p>
                 </div>
             </div>
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://kit.fontawesome.com/a86f8867e8.js" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-        <script src="../js/about_me.js"></script>
-        <script src="../js/main.js"></script>
+        </div>  
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/a86f8867e8.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/about_me.js"></script>
 </body>
 
 </html>

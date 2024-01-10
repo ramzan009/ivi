@@ -1,7 +1,7 @@
 <div class="menu">
     <div class="inside">
         <div class="logo">
-            <img class="img_log" src="images/logo.svg">
+           <a href="/"><img class="img_log" src="/images/logo.svg"></a> 
         </div>
         <div class="menu_ivi">
             <ul>
@@ -19,7 +19,7 @@
                              while ($cat = mysqli_fetch_assoc($categories) )
                               {
                                    ?>
-                            <a href="pages/select.php?category_id=<?php echo $cat['id'];?>">
+                            <a href="/pages/select.php?category_id=<?php echo $cat['id'];?>">
                                 <?php echo $cat['name'];?></a>
 
                         <?php
@@ -30,17 +30,16 @@
 
                         <div class="dropdown-link-shows">
                             <h1></h1>
-                            <a href="pages/select.html">Комедия</a>
-                            <a href="">Мелодрамы</a>
-                            <a href="">Мистические</a>
-                            <a href="">Приключение</a>
-                            <a href="">Романтические</a>
-                            <a href="">Телешоу</a>
-                            <a href="">Триллеры</a>
-                            <a href="">Турецкие</a>
-                            <a href="">Ужасы</a>
-                            <a href="">Фантастика</a>
-                            <a href="">Фэнтези</a>
+                            <?php 
+                            $categories_2 = mysqli_query($connection, "SELECT * FROM `categories` LIMIT 10 OFFSET 11");
+                               
+                               while ($cat_2 = mysqli_fetch_assoc($categories_2) )
+                                {
+                                  ?> 
+                                  <a href="/pages/select.php?category_id=<?php echo $cat_2['id']?>"><?php echo $cat_2['name'];?></a>
+                              <?php    
+                               }
+                            ?>                            
                         </div>
                         <div class="dropdown-link-shows">
                             <h1>Страны</h1>
@@ -179,7 +178,7 @@
             <ul>
                 <li class="group"><i class="fa-solid fa-magnifying-glass search"><a href=""> Поиск</a></i></li>
                 <li><a href=""><i class="fa-regular fa-bell bores"></i></a></li>
-                <li><i class="fa-regular fa-user ofice"><a href=""> Войти</a></i></li>
+                <li><a href="/pages/registration.php"><i class="fa-regular fa-user ofice"> Войти</i></a></li>
             </ul>
         </div>
     </div>
@@ -192,8 +191,10 @@
         <div class="cores_block">
             <h1 class="joiter">Поиск</h1>
             <div class="icon_block">
-                <input class="input_block" type="text" placeholder="Фильмы,персены,жанры">
+                <form action="/pages/search.php" method="GET">
+                <input  class="input_block" name="search"  type="text" placeholder="Фильмы,персены,жанры">
                 <i class="fa-solid fa-magnifying-glass search_glass"></i>
+                </form>
             </div>
         </div>
         <div class="presets">
